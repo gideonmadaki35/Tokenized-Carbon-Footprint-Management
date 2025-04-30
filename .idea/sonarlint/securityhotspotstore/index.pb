@@ -1,3 +1,21 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+Q
+!contracts/emissions-tracking.clar,f/3/f3f922a4f5653d8c95de3bc2dd7534866d850f67
+>
+.gitattributes,2/4/24139dae656713ba861751fb2c2ac38839349a7a
+P
+ tests/emissions-tracking.test.ts,1/2/126896b7074e93b364c64e4cebd54f178496639e
+R
+"contracts/entity-verification.clar,6/6/660a74c2729ef5ed0792e040998f714055016c6e
+Q
+!tests/entity-verification.test.ts,6/b/6bf7f6b6710cedecd531e1b9498c8f97b41d9de1
+R
+"contracts/offset-verification.clar,2/c/2ce9995d6c6caa02cb96c4556e3a00ab3928689d
+Q
+!tests/offset-verification.test.ts,1/5/15b7b72727fe47d5e605286f31df73188d326898
+H
+contracts/reporting.clar,c/b/cb3f865f5236d2f1405a540b885a7dd2fb4b4adf
+G
+tests/reporting.test.ts,7/d/7d2645500e7f0af0f612461d0d06bd36de231541
