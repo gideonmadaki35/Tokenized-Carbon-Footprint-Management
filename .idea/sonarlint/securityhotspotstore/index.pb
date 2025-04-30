@@ -9,3 +9,5 @@ P
  tests/emissions-tracking.test.ts,1/2/126896b7074e93b364c64e4cebd54f178496639e
 R
 "contracts/entity-verification.clar,6/6/660a74c2729ef5ed0792e040998f714055016c6e
+Q
+!tests/entity-verification.test.ts,6/b/6bf7f6b6710cedecd531e1b9498c8f97b41d9de1

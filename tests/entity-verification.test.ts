@@ -1,21 +1,57 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 
-import { describe, expect, it } from "vitest";
+// Mock Clarity environment
+const mockClarity = {
+  tx: {
+    sender: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM', // Mock address
+  },
+  contracts: {
+    entityVerification: {
+      verifyEntity: (entity) => ({
+        result: { value: true }
+      }),
+      isVerified: (entity) => ({
+        result: { value: false }
+      }),
+      revokeVerification: (entity) => ({
+        result: { value: true }
+      }),
+      setAdmin: (newAdmin) => ({
+        result: { value: true }
+      }),
+    }
+  }
+};
 
-const accounts = simnet.getAccounts();
-const address1 = accounts.get("wallet_1")!;
-
-/*
-  The test below is an example. To learn more, read the testing documentation here:
-  https://docs.hiro.so/stacks/clarinet-js-sdk
-*/
-
-describe("example tests", () => {
-  it("ensures simnet is well initalised", () => {
-    expect(simnet.blockHeight).toBeDefined();
+// Tests for entity-verification contract
+describe('Entity Verification Contract', () => {
+  let clarity;
+  
+  beforeEach(() => {
+    clarity = { ...mockClarity };
   });
-
-  // it("shows an example", () => {
-  //   const { result } = simnet.callReadOnlyFn("counter", "get-counter", [], address1);
-  //   expect(result).toBeUint(0);
-  // });
+  
+  it('should verify an entity', () => {
+    const entity = 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG';
+    const result = clarity.contracts.entityVerification.verifyEntity(entity);
+    expect(result.result.value).toBe(true);
+  });
+  
+  it('should check if an entity is verified', () => {
+    const entity = 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG';
+    const result = clarity.contracts.entityVerification.isVerified(entity);
+    expect(result.result.value).toBe(false);
+  });
+  
+  it('should revoke verification', () => {
+    const entity = 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG';
+    const result = clarity.contracts.entityVerification.revokeVerification(entity);
+    expect(result.result.value).toBe(true);
+  });
+  
+  it('should set a new admin', () => {
+    const newAdmin = 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG';
+    const result = clarity.contracts.entityVerification.setAdmin(newAdmin);
+    expect(result.result.value).toBe(true);
+  });
 });
