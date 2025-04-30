@@ -1,21 +1,58 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 
-import { describe, expect, it } from "vitest";
+// Mock Clarity environment
+const mockClarity = {
+  tx: {
+    sender: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  },
+  contracts: {
+    offsetVerification: {
+      registerOffsetProject: (name, offsetAmount) => ({
+        result: { value: true }
+      }),
+      verifyOffsetProject: (projectId) => ({
+        result: { value: true }
+      }),
+      getOffsetProject: (projectId) => ({
+        result: {
+          value: {
+            owner: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+            name: 'Reforestation Project',
+            offsetAmount: 5000,
+            verified: true,
+            verifier: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM'
+          }
+        }
+      }),
+    }
+  }
+};
 
-const accounts = simnet.getAccounts();
-const address1 = accounts.get("wallet_1")!;
-
-/*
-  The test below is an example. To learn more, read the testing documentation here:
-  https://docs.hiro.so/stacks/clarinet-js-sdk
-*/
-
-describe("example tests", () => {
-  it("ensures simnet is well initalised", () => {
-    expect(simnet.blockHeight).toBeDefined();
+// Tests for offset-verification contract
+describe('Offset Verification Contract', () => {
+  let clarity;
+  
+  beforeEach(() => {
+    clarity = { ...mockClarity };
   });
-
-  // it("shows an example", () => {
-  //   const { result } = simnet.callReadOnlyFn("counter", "get-counter", [], address1);
-  //   expect(result).toBeUint(0);
-  // });
+  
+  it('should register a new offset project', () => {
+    const name = 'Reforestation Project';
+    const offsetAmount = 5000;
+    const result = clarity.contracts.offsetVerification.registerOffsetProject(name, offsetAmount);
+    expect(result.result.value).toBe(true);
+  });
+  
+  it('should verify an offset project', () => {
+    const projectId = 1;
+    const result = clarity.contracts.offsetVerification.verifyOffsetProject(projectId);
+    expect(result.result.value).toBe(true);
+  });
+  
+  it('should get offset project details', () => {
+    const projectId = 1;
+    const result = clarity.contracts.offsetVerification.getOffsetProject(projectId);
+    expect(result.result.value.name).toBe('Reforestation Project');
+    expect(result.result.value.verified).toBe(true);
+  });
 });

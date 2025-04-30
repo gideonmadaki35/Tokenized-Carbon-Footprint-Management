@@ -11,3 +11,7 @@ R
 "contracts/entity-verification.clar,6/6/660a74c2729ef5ed0792e040998f714055016c6e
 Q
 !tests/entity-verification.test.ts,6/b/6bf7f6b6710cedecd531e1b9498c8f97b41d9de1
+R
+"contracts/offset-verification.clar,2/c/2ce9995d6c6caa02cb96c4556e3a00ab3928689d
+Q
+!tests/offset-verification.test.ts,1/5/15b7b72727fe47d5e605286f31df73188d326898
